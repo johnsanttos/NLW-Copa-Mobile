@@ -1,15 +1,30 @@
-import { Center, Text } from "native-base";
+import { Center, Text, Icon } from "native-base";
+import Logo from "../assets/logo.svg"
+import {Fontisto } from '@expo/vector-icons'
+import { Button } from "../../components/Button";
 
+export function SignIn() {
+  return (
+    <Center flex={1} bgColor={"gray.900"} padding={7}>
 
-export function SignIn(){
-return(
-    <Center flex={1} bgColor={"gray.900"} alignItems={'center'} justifyContent={'center'}>
+      <Logo width={212} height={40} />
 
-      /* <Text color={'white'} fontSize={24}
-      >SignIn!!! 
-      </Text> */
-    
+      <Button 
+        type="SECONDARY"
+        title='ENTRAR COM GOOGLE'
+        leftIcon={<Icon as={Fontisto} name='google' color="white" size="md" />}
+        marginTop={12}
+  
+        _loading={{
+          _spinner: { color: 'white' }
+        }}
+      />
+      <Text color="white" textAlign="center" marginTop={4}>
+        Não utilizamos nenhuma informação além{'\n'}
+        do seu e-mail para criação de sua conta.
+      </Text>
+
     </Center>
 
-)
+  )
 }

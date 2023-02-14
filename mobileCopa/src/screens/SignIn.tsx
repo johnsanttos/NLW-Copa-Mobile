@@ -8,7 +8,7 @@ export function SignIn() {
 
   const {signIn ,user} = useAuth()
 
-  console.log ('DADOS' , user)
+  //console.log ('DADOS' , user)
 
   return (
     <Center flex={1} bgColor={"gray.900"} padding={7}>

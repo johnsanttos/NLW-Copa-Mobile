@@ -6,13 +6,16 @@ import { Button } from "../components/Button";
 
 
 export function Find() {
+	function vaiLa(){
+		console.log('clicou')
+	  }
 	return (
 		<VStack flex={1} bgColor={"gray.900"} >
 			<Header title="Buscar por código" showBackButton />
 
 			<VStack marginTop={8} mx={5} alignItems="center" >
 
-				<Heading fontFamily="heading" color="white" fontSize='xl' mb={8} textAlign="center">
+				<Heading  color="white" fontSize='xl' mb={8} textAlign="center">
 					Encontre um bolão através de{'\n'}
 					seu código único
 				</Heading>
@@ -22,6 +25,7 @@ export function Find() {
 					placeholder="Qual o código do bolão?"
 				/>
 				<Button
+					onPress={vaiLa}
 					title="BUSCAR POR CÓDIGO"
 				/>
 			</VStack>

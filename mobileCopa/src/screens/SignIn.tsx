@@ -6,7 +6,7 @@ import { Button } from "../components/Button";
 
 export function SignIn() {
 
-  const {signIn ,user} = useAuth()
+  const {signIn ,isUserLoading} = useAuth()
 
   //console.log ('DADOS' , user)
 
@@ -21,7 +21,7 @@ export function SignIn() {
         title='ENTRAR COM GOOGLE'
         leftIcon={<Icon as={Fontisto} name='google' color="white" size="md" />}
         marginTop={12}
-  
+        isLoading={isUserLoading}
         _loading={{
           _spinner: { color: 'white' }
         }}

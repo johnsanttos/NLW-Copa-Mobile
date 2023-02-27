@@ -5,6 +5,7 @@ import { Header } from "../components/Header";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { useState } from "react";
+import { api } from "../services/api";
 
 
 
@@ -26,7 +27,14 @@ export function New() {
 		}
 		try {
 			setIsLoading(true)
+			await api.post('/pools', { title: title })
+			toast.show({
+				title: 'Bolão criado com sucesso!',
+				placement: 'top',
+				bgColor: 'green.500'
+			})
 
+			setTitle('')
 
 		} catch (error) {
 			console.log(error)

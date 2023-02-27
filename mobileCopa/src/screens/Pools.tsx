@@ -1,7 +1,8 @@
 import { FlatList, Icon, VStack, useToast } from "native-base";
 import { Octicons } from '@expo/vector-icons'
 import { Button } from "../components/Button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import {useFocusEffect} from '@react-navigation/native'
 import { Header } from "../components/Header";
 import { useNavigation } from "@react-navigation/native";
 import { api } from "../services/api";
@@ -35,12 +36,12 @@ export function Pools() {
 			setIsLoading(false)
 		}
 	}
-
-	useEffect(() => {
+// useFocusEffect vai executar a função sempre que entrarmos na tela, useCallback garante que a função não seja executada multiplas vezes
+	useFocusEffect(useCallback(() => {
 		fetchPools()
-	}, [
+	}, []))
 
-	])
+
 
 	return (
 		<VStack flex={1} bgColor={"gray.900"}>

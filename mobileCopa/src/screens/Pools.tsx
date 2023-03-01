@@ -71,9 +71,10 @@ export function Pools() {
 						//data={item} component que vai renderizar a flatlist, passando o item individualmente
 						data={pools}
 						keyExtractor={item => item.id}
-						renderItem={({ item }) => <PoolCard
+						renderItem={({ item }) => (<PoolCard
 							data={item}
-						/>}
+							onPress={()=> navigation.navigate('details', {id:item.id})}
+						/>)}
 						padding={5}
 						showsVerticalScrollIndicator={false}
 						_contentContainerStyle={{ paddingBottom: 10 }}

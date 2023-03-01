@@ -1,10 +1,10 @@
 import { Heading, HStack, Text, VStack } from 'native-base';
 
-import { PoolCardPros } from './PoolCard';
+import { PoolCardProps } from './PoolCard';
 import { Participants } from './Participants';
 
 interface Props {
-  data: PoolCardPros;
+  data: PoolCardProps;
 }
 
 export function PoolHeader({ data }: Props) {

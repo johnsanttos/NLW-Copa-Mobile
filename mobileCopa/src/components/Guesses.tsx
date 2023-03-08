@@ -10,11 +10,11 @@ import { isLoaded } from 'expo-font';
 
 interface Props {
   poolId: string;
-
+  code: string
 }
 
 
-export function Guesses({ poolId }: Props) {
+export function Guesses({ poolId, code }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [game,setGame] =useState<GameProps []>([])
   const[firstTeamPoints, setFirstTeamPoints] = useState('')
@@ -26,7 +26,6 @@ export function Guesses({ poolId }: Props) {
     try {
       setIsLoading(true)
       const response = await api.get(`/pools/${poolId}/games`)
-      console.log( 'aiiiieeeee', response.data.games)
       setGame(response.data.games)
 
     } catch (error) {
@@ -93,6 +92,9 @@ export function Guesses({ poolId }: Props) {
    />
    )}
    _contentContainerStyle={{pb: 10}}
+   ListEmptyComponent={()=> <EmptyMyPoolList 
+    code={code}
+   />}
    />
   )
 }

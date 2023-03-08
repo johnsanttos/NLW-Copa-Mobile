@@ -19,6 +19,7 @@ export interface AuthContextDataProps {
 	user: UserProps
 	isUserLoading: boolean
 	signIn: () => Promise<void>
+	signOut:() => Promise<void>
 }
 
 interface AuthContextProviderProps {
@@ -60,12 +61,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 		try {
 
 			const tokenResponse = await api.post('/users', { access_token: access_Token });
-		
+
 			api.defaults.headers.common['Authorization'] = `Bearer ${tokenResponse.data.token}`;
 
 			const userInfoResponse = await api.get('/me');
 
-			const data ={
+			const data = {
 				...userInfoResponse
 			}
 
@@ -74,7 +75,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
 			setUser(userInfoResponse.data.user);
 
-		
+
 		} catch (error) {
 			console.log(error);
 			throw error;
@@ -89,15 +90,15 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 		}
 	}, [response])
 
-	useEffect(()=>{
-		
-		async function getUser() {	
+	useEffect(() => {
+
+		async function getUser() {
 			//pegar dados salvos do asyncStorage
-			const userInfo =await AsyncStorage.getItem('@johncopa')
+			const userInfo = await AsyncStorage.getItem('@johncopa')
 			//JSON.parse tranforma string em objeto
 			let hasUser = JSON.parse(userInfo || '{}')
 			// verificar se recebemos as informações do async
-			if(Object.keys(hasUser).length > 0 ){
+			if (Object.keys(hasUser).length > 0) {
 				api.defaults.headers.common['Authorization'] = `Bearer ${hasUser.data.token}`;
 				//console.log('iiiiiiiiiiiiiiiiiiiiiiiiii' , hasUser.data)
 				setUser(hasUser.data.user)
@@ -107,16 +108,26 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
 		getUser()
 
-		},[])
+	}, [])
 
-		if (isUserLoading){
-			return <Loading/>
-		  }
+	async function signOut() {
+		await AsyncStorage.clear().then(() => {
+			setUser({
+				name:'',
+				avatarUrl: ''
+		})
+		})
+	}
+
+	if (isUserLoading) {
+		return <Loading />
+	}
 
 
 	return (
 		<AuthContext.Provider value={{
 			signIn,
+			signOut,
 			isUserLoading,
 			user,
 		}}>

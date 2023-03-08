@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Center, Heading, Text, useToast, VStack } from "native-base";
 import Logo from '../assets/logo.svg'
 
@@ -6,10 +7,13 @@ import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { useState } from "react";
 import { api } from "../services/api";
-
+import { AuthContext } from "../context/AuthContext";
 
 
 export function New() {
+
+	const {signOut} = useContext(AuthContext)
+
 	const [title, setTitle] = useState('');
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -51,12 +55,15 @@ export function New() {
 
 	return (
 		<VStack flex={1} bgColor={"gray.900"} >
-			<Header title="Criar novo bolão" />
+			<Header 
+			title="Criar novo bolão"
+			showSignOutButton
+			signOut={signOut}
+			 />
 
-			<VStack marginTop={8} mx={5} alignItems="center" >
-				<Logo />
-
-				<Heading fontFamily="heading" color="white" fontSize='xl' my={8} textAlign="center">
+			<VStack marginTop={8} mx={5} alignItems="center" >	
+			<Logo />
+			<Heading fontFamily="heading" color="white" fontSize='xl' my={8} textAlign="center">
 					Crie seu próprio bolão da copa{'\n'}
 					e compartilhe entre amigos!
 				</Heading>
